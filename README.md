@@ -12,8 +12,8 @@ or pure `opencv` - much faster but without most features
 
 Upon startup the app automatically looks for supported cameras by matching the resolutions.
 
+Running `python ./pyplot.py` will start the camera stream and show the controls below:
 ```
-python ./pyplot.py
 keys:
     'h'      - help
     'q'      - quit
@@ -37,8 +37,10 @@ mouse:
     left  button - add Region Of Interest (ROI)
     right button - add user temperature annotation
 ```
+While the program is running you can use these controls in the camera view to control how it looks and behaves.
 
-Alternatively you can specify the video device directly with `-d` to skip the search routine. 
+
+You can specify the video device directly with `-d` to the startup command to skip the search routine. 
 
 Also for T2S+ V2 users (and potentially for others, where the camera sends raw data and doesn't do onboard processing resulting in the image looking like a pixelated mess) you can specify the `-r` option to tell the program to treat the camera stream as raw sensor data. This will perform a few calibration routines and present you with a usable image doing the sensor processing in python. There is also the `-o` parameter which adds an offset to the entire frames temperature values. This is useful for calibrating the camera since the raw mode sometimes ends up with a constant offset to the image, but this is specific to the camera and thus can be found once and then used for subsequent runs.
 
