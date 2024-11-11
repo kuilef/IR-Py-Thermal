@@ -129,7 +129,7 @@ class Camera:
             except:
                 pass
         raise ValueError(
-            f"Cannot find camera with a width of one of {cls.supported_resolutions} that also matches: {width=} and {height=}"
+            f"Cannot find camera with a width of one of {cls.supported_resolutions} that also matches: {cap_width=} and {cap_height=}"
         )
 
     def bin_to_twos_complement(self, binary: str) -> int:
