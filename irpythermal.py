@@ -482,7 +482,7 @@ class Camera:
         # if there are no dead pixels, we skip the dead pixel correction
         if np.count_nonzero(frame_visible_float < threshold) != 0:
             self.dead_pixels_mask = cv2.inRange(
-                frame_visible_float, 0, threshold
+                frame_visible_float, 0, float(threshold)
             ).astype(np.uint8)
 
         if not quiet:
