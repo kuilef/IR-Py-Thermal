@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import cv2
 import numpy as np
 
@@ -74,10 +76,6 @@ def inRoi(roi, point, shape):
     return result
 
 
-def subdict(d, l):
-    return dict((k, d[k]) for k in l if k in d)
-
-
 class Annotations:
     def __init__(self, ax, patches):
         self.ax = ax
@@ -121,8 +119,9 @@ class Annotations:
         return val
 
     def update(self, temp_annotations, annotation_frame, draw_temp):
-        l = temp_annotations["std"].items() | temp_annotations["user"].items()
-        for name, color in l:
+        for name, color in (
+            temp_annotations["std"].items() | temp_annotations["user"].items()
+        ):
             pos = self._get_pos(name, annotation_frame, self.roi)
             self._ann_set_temp(
                 self.get_ann(name, color), pos, annotation_frame, draw_temp

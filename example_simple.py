@@ -1,8 +1,6 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
+
 import time
-
-import numpy as np
-
 import irpythermal
 
 # create camera object and do a initial calibration

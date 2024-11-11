@@ -144,7 +144,7 @@ if lockin:
     cbar_quadrature = plt.colorbar(im_quadrature, cax=cax_quadrature)
 
     axes[1][0].axis("off")
-    status_text = f"""
+    status_text = """
 Frame: -,
 Time: -/-,
 Load: -,
@@ -208,25 +208,6 @@ def log_annotations_to_csv(annotation_frame):
             writer.writerow([datetime.now()] + anns_data)
 
 
-import csv
-from datetime import datetime  # to easily get miliseconds
-
-csv_filename = None
-
-
-def log_annotations_to_csv(annotation_frame):
-    anns_data = []
-    for type in ["std", "user"]:
-        for ann_name in temp_annotations[type]:
-            pos = annotations.get_pos(ann_name)
-            val = round(annotations.get_val(ann_name, annotation_frame), 2)
-            anns_data += [pos[0], pos[1], val]  # store each position and value
-    if csv_filename is not None:
-        with open(csv_filename, "a", newline="") as f:
-            writer = csv.writer(f)
-            writer.writerow([datetime.now()] + anns_data)
-
-
 def get_lockin_frame(freq, port, integration):
     """This function will perform all of the lock-in thermometry operations, and return
     the in-phase and quadrature frames after the integration time is up, while controlling
@@ -236,8 +217,8 @@ def get_lockin_frame(freq, port, integration):
 
     try:
         ser = serial.Serial(port, 115200)  # Open the serial port
-    except serial.SerialException as e:
-        print(f"Error: could not open serial port {port}")
+    except serial.SerialException as exc:
+        print(f"Error: could not open serial port {port} ({exc})")
         sys.exit(1)
 
     start_time = time.time()
@@ -308,7 +289,7 @@ Serial Port: {port}
         in_phase_sum += in_phase
         quadrature_sum += quadrature
 
-        if is_capturing == False:
+        if not is_capturing:
             break
 
     ser.write(b"0\n")
@@ -363,7 +344,7 @@ def animate_func(i):
         frame = camera.get_frame()
         start_skips -= 1
     elif lockin:
-        if is_capturing == False:
+        if not is_capturing:
             lock_in_thread = start_capture()
         # in_phase_frame, quad_frame = get_lockin_frame(fequency, port, integration)
     else:

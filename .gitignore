@@ -2,3 +2,5 @@ __pycache__
 .vscode
 *.wpr
 *.wpu
+*.npy
+*.csv
