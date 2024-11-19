@@ -20,3 +20,14 @@ ruff = "^0.7.3"
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    "ISC001",
+    "COM812", # trailing comma missing
+    "D203", # one-blank-line-before-class
+    "D212", # multi-line-summary-first-line
+    "T201", # print-found
+    "TD002", # issue author missing
+    "TD003", # issue link missing
+    ]
